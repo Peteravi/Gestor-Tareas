@@ -1,0 +1,376 @@
+/* ===== VARIABLES GLOBALES ===== */
+:root {
+    --primary-color: #4361ee;
+    --primary-hover: #3a56d4;
+    --success-color: #06d6a0;
+    --danger-color: #ef476f;
+    --warning-color: #ffd166;
+    --dark-color: #073b4c;
+    --light-bg: #f8f9fa;
+    --gradient-start: #667eea;
+    --gradient-end: #764ba2;
+    --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.1);
+    --border-radius: 1rem;
+    --transition: all 0.3s ease;
+}
+
+/* ===== RESET Y BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    color: var(--dark-color);
+    line-height: 1.6;
+}
+
+/* ===== UTILIDADES ===== */
+.bg-gradient {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.badge.bg-git {
+    background: linear-gradient(135deg, #f34f29, #f14e32);
+    color: white;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+}
+
+/* ===== HEADER ===== */
+.header-app {
+    background: white;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* ===== CARDS ===== */
+.card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: none;
+    transition: var(--transition);
+    animation: fadeInUp 0.5s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg) !important;
+}
+
+/* ===== FORMULARIOS ===== */
+.task-form .input-group {
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.task-form .input-group:focus-within {
+    box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.15);
+}
+
+.task-form .form-control {
+    border: 2px solid #e9ecef;
+    border-right: none;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.task-form .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: none;
+}
+
+.task-form .btn {
+    border: none;
+    background: var(--primary-color);
+    padding: 0.75rem 2rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.task-form .btn:hover {
+    background: var(--primary-hover);
+    transform: scale(1.02);
+}
+
+/* ===== LISTA DE TAREAS ===== */
+#taskList {
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) #e9ecef;
+}
+
+/* Scrollbar personalizada */
+#taskList::-webkit-scrollbar {
+    width: 8px;
+}
+
+#taskList::-webkit-scrollbar-track {
+    background: #e9ecef;
+    border-radius: 10px;
+}
+
+#taskList::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+/* Items de tarea */
+.list-group-item {
+    border: none;
+    border-bottom: 2px solid #f1f3f5;
+    padding: 1rem;
+    transition: var(--transition);
+    animation: slideIn 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.list-group-item:hover {
+    background: #f8f9fa;
+    transform: translateX(5px);
+}
+
+/* Checkbox personalizado */
+.task-checkbox {
+    margin-right: 1rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+    accent-color: var(--success-color);
+    transition: var(--transition);
+}
+
+.task-checkbox:hover {
+    transform: scale(1.1);
+}
+
+/* Texto de la tarea */
+.task-text {
+    flex: 1;
+    font-size: 1rem;
+    color: var(--dark-color);
+    transition: var(--transition);
+    cursor: pointer;
+    padding: 0.5rem 0;
+}
+
+.task-text.completed {
+    text-decoration: line-through;
+    color: #adb5bd;
+}
+
+/* Botón de eliminar */
+.btn-delete {
+    background: transparent;
+    border: none;
+    color: var(--danger-color);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    background: var(--danger-color);
+    color: white;
+    transform: rotate(90deg);
+}
+
+.btn-delete i {
+    font-size: 1rem;
+}
+
+/* ===== MENSAJES ===== */
+.alert {
+    border-radius: 0.75rem;
+    border: none;
+    animation: slideDown 0.3s ease;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+    color: #1a4731;
+}
+
+/* ===== BOTONES DE ACCIÓN ===== */
+.btn-outline-success,
+.btn-outline-danger,
+.btn-outline-secondary {
+    border-width: 2px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.btn-outline-success:hover {
+    background: var(--success-color);
+    border-color: var(--success-color);
+    transform: translateY(-2px);
+}
+
+.btn-outline-danger:hover {
+    background: var(--danger-color);
+    border-color: var(--danger-color);
+    transform: translateY(-2px);
+}
+
+.btn-outline-secondary:hover {
+    background: #6c757d;
+    border-color: #6c757d;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ===== ESTADOS VACÍOS ===== */
+#emptyMessage {
+    transition: var(--transition);
+}
+
+#emptyMessage i {
+    transition: var(--transition);
+}
+
+#emptyMessage:hover i {
+    transform: scale(1.1);
+    opacity: 0.7 !important;
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== MEDIA QUERIES ===== */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .display-4 {
+        font-size: 2rem;
+    }
+
+    .lead {
+        font-size: 1rem;
+    }
+
+    .task-form .btn {
+        padding: 0.75rem 1rem;
+    }
+
+    .list-group-item {
+        padding: 0.75rem;
+    }
+
+    .btn-delete {
+        width: 2rem;
+        height: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-body {
+        padding: 1.25rem !important;
+    }
+
+    .badge.bg-git {
+        display: block;
+        margin-top: 0.5rem;
+        max-width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* ===== ACCESIBILIDAD ===== */
+.visually-hidden-focusable:focus {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    background: white;
+    padding: 1rem;
+    z-index: 1000;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-lg);
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+/* ===== LOADING STATE (opcional) ===== */
+.loading {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
